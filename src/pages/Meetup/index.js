@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Textarea } from '@rocketseat/unform';
 import { MdAddCircleOutline } from 'react-icons/md';
@@ -19,21 +19,19 @@ const schema = Yup.object().shape({
 });
 
 export default function Meetup({ match, history }) {
-  const [meetup, setMeetup] = useState([]);
-
+  const [meetup, setMeetup] = useState();
+  console.log('id match', match.params);
   useEffect(() => {
     async function loadMeetup() {
-      if (match.params.id) {
-        const response = await api.get(`/meetups/${match.params.id}`);
-        setMeetup({ ...response.data, date: parseISO(response.data.date) });
-      }
+      const response = await api.get(`/meetups/${match.params.id}`);
+      setMeetup({ ...response.data, date: parseISO(response.data.date) });
     }
     loadMeetup();
   }, [match.params.id]);
 
   async function handleSubmit(data) {
     try {
-      if (meetup.length > 0) {
+      if (meetup) {
         await api.put(`/meetups/${meetup.id}`, { ...data });
       } else {
         await api.post(`/meetups`, { ...data });
@@ -62,7 +60,7 @@ export default function Meetup({ match, history }) {
 
         <button type="submit">
           <MdAddCircleOutline size={20} />
-          {meetup ? 'Salvar meetup' : 'Alterar meetup'}
+          {meetup ? 'Alterar meetup' : 'Salvar meetup'}
         </button>
       </Form>
     </Container>
