@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
-
+import { Link } from 'react-router-dom';
 import api from '~/services/api';
 import { Container, Meetup } from './styles';
 import formatDate from '~/util/formatDate';
@@ -28,10 +28,12 @@ export default function Dashboard() {
     <Container>
       <header>
         <strong>Meus meetups</strong>
-        <button type="button" onClick={handleNewMeetup}>
-          <MdAddCircleOutline color="#fff" size={20} />
-          Novo meetup
-        </button>
+        <Link to="/meetup">
+          <button type="button" onClick={handleNewMeetup}>
+            <MdAddCircleOutline color="#fff" size={20} />
+            Novo meetup
+          </button>
+        </Link>
       </header>
 
       <ul>
