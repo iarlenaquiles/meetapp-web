@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
 import { Container } from './styles';
-import AvatarInput from './AvatarInput';
 import { updateProfileRequest } from '~/store/modules/user/actions';
-import { signOut } from '~/store/modules/auth/actions';
 
 export default function Profile() {
   const profile = useSelector(state => state.user.profile);
@@ -14,10 +12,6 @@ export default function Profile() {
 
   function handleSubmit(data) {
     dispatch(updateProfileRequest(data));
-  }
-
-  function handleSignOut() {
-    dispatch(signOut());
   }
 
   return (
