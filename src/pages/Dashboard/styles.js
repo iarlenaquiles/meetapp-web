@@ -77,8 +77,16 @@ export const Meetup = styled.li`
     font-weight: normal;
   }
 
-  span {
-    margin-top: 3px;
-    color: ${props => (props.available ? '#999' : '#666')};
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      color: ${props => (props.available ? '#999' : '#666')};
+    }
+
+    svg {
+      margin-left: 5px;
+    }
   }
 `;
