@@ -73,7 +73,7 @@ export const Meetup = styled.li`
 
   strong {
     color: #fff;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: normal;
   }
 
