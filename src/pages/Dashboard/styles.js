@@ -54,28 +54,30 @@ export const Container = styled.div`
 
   ul {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     grid-gap: 15px;
     margin-top: 30px;
   }
 `;
 
-export const Time = styled.li`
+export const Meetup = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 62px;
   padding: 20px;
   border-radius: 4px;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.5);
 
   opacity: ${props => (props.past ? 0.6 : 1)};
 
   strong {
-    display: block;
-    color: ${props => (props.available ? '#999' : '#7159c1')};
+    color: #fff;
     font-size: 20px;
     font-weight: normal;
   }
 
   span {
-    display: block;
     margin-top: 3px;
     color: ${props => (props.available ? '#999' : '#666')};
   }
