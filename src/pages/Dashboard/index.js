@@ -10,7 +10,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadMeetups() {
-      const response = await api.get('meetups');
+      const response = await api.get('organizing');
 
       response.data.map(item => {
         item.formattedDate = formatDate(item.date);
@@ -36,7 +36,7 @@ export default function Dashboard() {
 
       <ul>
         {meetups.map(meetup => (
-          <Meetup key={String(meetup.id)}>
+          <Meetup key={String(meetup.id)} past={meetup.past}>
             <strong>{meetup.title}</strong>
             <div>
               <span>{meetup.formattedDate}</span>

@@ -69,7 +69,7 @@ export const Meetup = styled.li`
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.5);
 
-  opacity: ${props => (props.past ? 0.6 : 1)};
+  opacity: ${props => (props.past ? 0.2 : 1)};
 
   strong {
     color: #fff;
