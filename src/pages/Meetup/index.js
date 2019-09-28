@@ -4,6 +4,7 @@ import { Form, Input, Textarea } from '@rocketseat/unform';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { parseISO } from 'date-fns';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 import { Container } from './styles';
 import DatePicker from './DatePicker';
 import ImagePicker from './ImagePicker';
@@ -19,21 +20,28 @@ const schema = Yup.object().shape({
 
 export default function Meetup({ match, history }) {
   const [meetup, setMeetup] = useState([]);
-  const { meetupId } = match.params;
-
-  const initMeetup = useCallback(async () => {
-    if (meetupId) {
-      const response = await api.get(`meetup/${meetupId}`);
-      setMeetup({ ...response.data, date: parseISO(response.data.date) });
-    }
-  }, [meetupId]);
 
   useEffect(() => {
-    initMeetup();
-  }, [initMeetup]);
+    async function loadMeetup() {
+      if (match.params.id) {
+        const response = await api.get(`/meetups/${match.params.id}`);
+        setMeetup({ ...response.data, date: parseISO(response.data.date) });
+      }
+    }
+    loadMeetup();
+  }, [match.params.id]);
 
-  function handleSubmit(data) {
-    console.log(data);
+  async function handleSubmit(data) {
+    try {
+      if (meetup.length > 0) {
+        await api.put(`/meetups/${meetup.id}`, { ...data });
+      } else {
+        await api.post(`/meetups`, { ...data });
+      }
+      history.push('/dashboard');
+    } catch (error) {
+      toast.error(`Error na criação do Meetup`);
+    }
   }
 
   return (
@@ -54,7 +62,7 @@ export default function Meetup({ match, history }) {
 
         <button type="submit">
           <MdAddCircleOutline size={20} />
-          Salvar meetup
+          {meetup ? 'Salvar meetup' : 'Alterar meetup'}
         </button>
       </Form>
     </Container>
