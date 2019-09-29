@@ -27,7 +27,7 @@ export default function Dashboard() {
     <Container>
       <header>
         <strong>Meus meetups</strong>
-        <Link to="/meetup">
+        <Link to="/meetup/create">
           <button type="button" onClick={handleNewMeetup}>
             <MdAddCircleOutline color="#fff" size={20} />
             Novo meetup

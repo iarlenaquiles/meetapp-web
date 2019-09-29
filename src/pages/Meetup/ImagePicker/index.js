@@ -12,6 +12,11 @@ export default function ImagePicker() {
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
 
+  useEffect(() => {
+    setFile(defaultValue && defaultValue.id);
+    setPreview(defaultValue && defaultValue.url);
+  }, [defaultValue]);
+
   const ref = useRef();
 
   useEffect(() => {
@@ -22,7 +27,7 @@ export default function ImagePicker() {
         path: 'dataset.file',
       });
     }
-  }, [ref, registerField]);
+  }, [ref.current, defaultValue]); // eslint-disable-line
 
   async function handleChange(e) {
     const data = new FormData();
@@ -46,7 +51,7 @@ export default function ImagePicker() {
           <>
             <DefaulImg>
               <DefaulImgContent>
-                <MdCameraAlt size={36} color="#fff" />
+                <MdCameraAlt size="54" color="#fff" />
                 <span>Selecionar imagem</span>
               </DefaulImgContent>
             </DefaulImg>

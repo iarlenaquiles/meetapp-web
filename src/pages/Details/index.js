@@ -11,7 +11,7 @@ class Meetup {
 
 export default function Details({ match, history }) {
   const [meetup, setMeetup] = useState(new Meetup());
-
+  console.log('id details', match);
   const initMeetup = useCallback(async () => {
     const response = await api.get(`/meetups/${match.params.id}`);
 
